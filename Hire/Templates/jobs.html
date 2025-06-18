@@ -237,8 +237,50 @@
             </div>
           </div>
         </div>
+            {% for job in allPosts %}
+            <!-- Single Verticle job -->
+            <div class="job-verticle-list">
+                <div class="vertical-job-card">
+                    <div class="vertical-job-header">
+                        <div class="vrt-job-cmp-logo">
+                            <a href="/job_details/{{ job.jobid }}"><img src="{{ job.company_logo.url }}" class="img-responsive" alt="logo" /></a>
+                        </div>
+                        <h4>{{ job.company.companyname }}</a></h4>
+                        <span class="com-tagline">{{ job.job_title }}</span>
+                        <span class="pull-right vacancy-no">No. <span class="v-count">{{ job.open_position }}</span></span>
+                    </div>
+                    <div class="vertical-job-body">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12 col-xs-12">
+                                <ul class="can-skils">
+                                    <li><strong>Job Id: </strong>G{{ job.jobid }}</li>
+                                    <li><strong>Job Type: </strong>{{ job.job_type }}</li>
+                                    <li><strong>Skills: </strong>
+                                        <div>
+                                          <span class="skill-tag">{{ job.job_skill }}</span> 
+                                        </div>
+                                    </li>
+                                    <li><strong>Experience: </strong>{{ job.job_experience }} Year</li>
+                                    <li><strong>Location: </strong>{{ job.job_location }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <div class="vrt-job-act">
+                                    <a href="/job_details/{{ job.jobid }}" class="btn-job theme-btn job-apply">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+<div class="col-md-12">
+    <p>No results found.</p>
+</div>
+            {% endfor %}
 
-        <!-- Single Verticle job -->
+
+        <!-- Single Verticle job 
         <div class="job-verticle-list">
           <div class="vertical-job-card">
             <div class="vertical-job-header">
@@ -263,9 +305,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
-        <!-- Single Verticle job -->
+        <!-- Single Verticle job 
         <div class="job-verticle-list">
           <div class="vertical-job-card">
             <div class="vertical-job-header">
@@ -290,9 +332,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
-        <!-- Single Verticle job -->
+        <!-- Single Verticle job 
         <div class="job-verticle-list">
           <div class="vertical-job-card">
             <div class="vertical-job-header">
@@ -317,9 +359,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
-        <!-- Single Verticle job -->
+        <!-- Single Verticle job 
         <div class="job-verticle-list">
           <div class="vertical-job-card">
             <div class="vertical-job-header">
@@ -344,9 +386,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
-        <!-- Single Verticle job -->
+        <!-- Single Verticle job 
         <div class="job-verticle-list">
           <div class="vertical-job-card">
             <div class="vertical-job-header">
@@ -371,7 +413,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
         <div class="clearfix"></div>
 		<div class="utf_flexbox_area padd-0">
 			<ul class="pagination">

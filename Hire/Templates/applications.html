@@ -23,11 +23,36 @@
             <th>Location</th>
             <th>Email</th>
             <th>Applied</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
+        <tbody>          
+            {% for application in allPosts %}
+            <tr>
+                <td>
+                    <a href="/applications/{{ application.applicationid }}">
+                        <img src="{{ application.JobPost.company_logo.url }}" class="avatar-lg" alt="Avatar">{{ application.JobPost.job_title }} 
+                        <span class="mng-jb">{{ application.JobPost.company.companyname }}</span>
+                    </a>
+                </td>
+                <td><i class="ti-location-pin"></i>{{ application.JobPost.job_location }}</td>
+                <td>{{ application.JobPost.company.company_email }}</td> <!-- Assuming 'email' is a field in Company model -->
+                <td><i class="ti-credit-card"></i>{{ application.application_date|date:"d M Y" }}</td>
+                <td>
+                  <span class="badge 
+                    {% if application.status == 'ACCEPTED' %} badge-success 
+                    {% elif application.status == 'REJECTED' %} badge-danger 
+                    {% elif application.status == 'PENDING' %} badge-warning 
+                    {% else %} badge-secondary 
+                    {% endif %}">
+                    {{ application.status }}
+                  </span>
+                </td>
+                <td><a href="{% url 'delete_application' application.applicationid %}" class="cl-danger mrg-5" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a></td>
+            </tr>
+            {% endfor %}
+         <!-- <tr>
             <td><a href="/job_details"> <img src="{% static 'assets/img/company_logo_1.png' %}" class="avatar-lg" alt="Avatar">Software Development <span class="mng-jb">Apple Inc</span> </a></td>
             <td><i class="ti-location-pin"></i> 2708 Scenic Way, Sutter</td>
             <td>mail@example.com</td>
@@ -89,7 +114,7 @@
             <td>mail@example.com</td>
             <td><i class="ti-credit-card"></i> 01 Jan 2024</td>
             <td><a href="#" class="cl-danger mrg-5" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       <div class="utf_flexbox_area padd-10">
@@ -105,5 +130,19 @@
   </div>
 </section>
 <!-- ====================== End Manage Company ================ --> 
+<style>
+  .badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 0.25rem;
+  }
+  .badge-success { background-color: #28a745; }
+  .badge-danger { background-color: #dc3545; }
+  .badge-warning { background-color: #ffc107; color: #212529; }
+  .badge-secondary { background-color: #6c757d; }
+</style>
 
 {% endblock %}

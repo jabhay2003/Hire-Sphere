@@ -134,4 +134,3 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "Gmail Address"
 EMAIL_HOST_PASSWORD = "Gmail Password"
-

@@ -10,41 +10,42 @@
         <h2>Search Between More Then <span class="theme-cl">50,000</span> Open Jobs.</h2>
         <p>Trending Jobs Keywords: <span class="trending_key"><a href="/jobs">Web Designer</a></span> <span class="trending_key"><a href="/jobs">Web Developer</a></span> <span class="trending_key"><a href="/jobs">IOS Developer</a></span> <span class="trending_key"><a href="/jobs">Android Developer</a></span></p>
       </div>
-      <form>
+      <form method="get" action="/search">
         <fieldset class="utf_home_form_one">
           <div class="col-md-4 col-sm-4 padd-0">
-            <input type="text" class="form-control br-1" placeholder="Search Keywords..." />
+            <input type="text" class="form-control br-1" placeholder="Search Keywords..." / name="query" id="query">
           </div>
           <div class="col-md-3 col-sm-3 padd-0">
-            <select class="wide form-control br-1">
+            <select class="wide form-control br-1" name="location">
               <option data-display="Location">All Country</option>
-              <option value="1">Afghanistan</option>
-              <option value="2">Albania</option>
-              <option value="3">Algeria</option>
-			  <option value="4">Brazil</option>
-              <option value="5">Burundi</option>
-              <option value="6">Bulgaria</option>
-			  <option value="7">Germany</option>
-              <option value="8">Grenada</option>
-              <option value="9">Guatemala</option>
-              <option value="10" disabled>Iceland</option>
+              <option value="India">India</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+			  <option value="Brazil">Brazil</option>
+              <option value="Burundi">Burundi</option>
+              <option value="Bulgaria">Bulgaria</option>
+			  <option value="Germany">Germany</option>
+              <option value="Grenada">Grenada</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Iceland" disabled>Iceland</option>
             </select>
           </div>
           <div class="col-md-3 col-sm-3 padd-0">
-            <select class="wide form-control">
+            <select class="wide form-control" name="category">
               <option data-display="Category">Show All</option>
-              <option value="1">Software Developer</option>
-              <option value="2">Java Developer</option>
-              <option value="3">Software Engineer</option>
-			  <option value="4">Web Developer</option>
-              <option value="5">PHP Developer</option>
-              <option value="6">Python Developer</option>
-			  <option value="7">Front end Developer</option>
-              <option value="8">Associate Developer</option>
-              <option value="9">Back end Developer</option>
-			  <option value="10">XML Developer</option>
-              <option value="11">.NET Developer</option>              
-			  <option value="12" disabled>Marketting Developer</option>
+              <option value="Software Developer">Software Developer</option>
+              <option value="Java Developer">Java Developer</option>
+              <option value="Software Engineer">Software Engineer</option>
+			  <option value="Web Developer">Web Developer</option>
+              <option value="PHP Developer">PHP Developer</option>
+              <option value="Python Developer">Python Developer</option>
+			  <option value="Front end Developer">Front end Developer</option>
+              <option value="Associate Developer">Associate Developer</option>
+              <option value="Back end Developer">Back end Developer</option>
+			  <option value="XML Developer">XML Developer</option>
+              <option value=".NET Developer">.NET Developer</option>
+			  <option value="Marketting Developer" disabled>Marketting Developer</option>
             </select>
           </div>
           <div class="col-md-2 col-sm-2 padd-0 m-clear">
@@ -57,7 +58,92 @@
 </div>
 <!-- ======================= End Banner ===================== --> 
 
+
+
 <!-- ================= Job start ========================= -->
+<section class="padd-top-80 padd-bot-80">
+  <div class="container"> 
+    <ul class="nav nav-tabs nav-advance theme-bg" role="tablist">
+      <li class="nav-item active"> 
+        <a class="nav-link" data-toggle="tab" href="#latest" role="tab"> Latest Jobs</a> 
+      </li>
+      <li class="nav-item"> 
+        <a class="nav-link" data-toggle="tab" href="#recent" role="tab"> Recent Jobs</a> 
+      </li>
+    </ul>
+    <div class="tab-content"> 
+      <div class="tab-pane fade in show active" id="latest" role="tabpanel">
+        <div class="row"> 
+          {% for job in latest_jobs %}
+          <!-- Single Job -->
+          <div class="col-md-3 col-sm-6">
+            <div class="utf_grid_job_widget_area"> 
+              <span class="job-type {{ job.job_type|lower }}-type">{{ job.job_type }}</span>
+              <div class="utf_job_like">
+                <label class="toggler toggler-danger">
+                  <input type="checkbox">
+                  <i class="fa fa-heart"></i> 
+                </label>
+              </div>
+              <div class="u-content">
+                <div class="avatar box-80"> 
+                  <a href="/job_details/{{ job.jobid }}"> 
+                    <img class="img-responsive" src="{{ job.company_logo.url }}" alt=""> 
+                  </a> 
+                </div>
+                <h5><a href="/job_details/{{ job.jobid }}">{{ job.job_title }}</a></h5>
+                <p class="text-muted">{{ job.job_location }}</p>
+              </div>
+              <div class="utf_apply_job_btn_item"> 
+                <a href="/job_details/{{ job.jobid }}" class="btn job-browse-btn btn-radius br-light">Apply Now</a> 
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="tab-pane fade in" id="recent" role="tabpanel">
+        <div class="row"> 
+          {% for job in recent_jobs %}
+          <!-- Single Job -->
+          <div class="col-md-3 col-sm-6">
+            <div class="utf_grid_job_widget_area"> 
+              <span class="job-type {{ job.job_type|lower }}-type">{{ job.job_type }}</span>
+              <div class="utf_job_like">
+                <label class="toggler toggler-danger">
+                  <input type="checkbox">
+                  <i class="fa fa-heart"></i> 
+                </label>
+              </div>
+              <div class="u-content">
+                <div class="avatar box-80"> 
+                  <a href="/job_details/{{ job.jobid }}"> 
+                    <img class="img-responsive" src="{{ job.company_logo.url }}" alt=""> 
+                  </a> 
+                </div>
+                <h5><a href="/job_details/{{ job.jobid }}">{{ job.job_title }}</a></h5>
+                <p class="text-muted">{{ job.job_location }}</p>
+              </div>
+              <div class="utf_apply_job_btn_item"> 
+                <a href="/job_details/{{ job.jobid }}" class="btn job-browse-btn btn-radius br-light">Apply Now</a> 
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+  </div>
+</div>
+<div class="col-md-12 mrg-top-20 text-center">
+  <a href="/jobs" class="btn theme-btn btn-m">Browse All Jobs</a>
+</div>
+</div>
+</section>
+
+
+
+
+
+<!-- ================= Job start ========================= 
 <section class="padd-top-80 padd-bot-80">
   <div class="container"> 
     <ul class="nav nav-tabs nav-advance theme-bg" role="tablist">
@@ -66,8 +152,8 @@
     </ul>
     <div class="tab-content"> 
       <div class="tab-pane fade in show active" id="recent" role="tabpanel">
-        <div class="row"> 
-          <!-- Single Job -->
+        <div class="row"> -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
               <div class="utf_job_like">
@@ -83,9 +169,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
               <div class="utf_job_like">
@@ -101,9 +187,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -119,9 +205,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -137,9 +223,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type internship-type">Internship</span>
               <div class="utf_job_like">
@@ -155,9 +241,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -173,9 +259,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
               <div class="utf_job_like">
@@ -191,9 +277,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -211,12 +297,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       
-      <!-- Featured Job -->
+      <!-- Featured Job 
       <div class="tab-pane fade" id="featured" role="tabpanel">
-        <div class="row"> 
-          <!-- Single Job -->
+        <div class="row"> -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
               <div class="utf_job_like">
@@ -232,9 +318,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
               <div class="utf_job_like">
@@ -250,9 +336,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Full Time</span>
               <div class="utf_job_like">
@@ -268,9 +354,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -286,9 +372,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type internship-type">Internship</span>
               <div class="utf_job_like">
@@ -304,9 +390,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -322,9 +408,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
               <div class="utf_job_like">
@@ -340,9 +426,9 @@
               </div>
               <div class="utf_apply_job_btn_item"> <a href="/job_details" class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
             </div>
-          </div>
+          </div>-->
           
-          <!-- Single Job -->
+          <!-- Single Job 
           <div class="col-md-3 col-sm-6">
             <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
               <div class="utf_job_like">
@@ -366,7 +452,7 @@
       <a href="/jobs" class="btn theme-btn btn-m">Browse All Jobs</a>
     </div>
   </div>
-</section>
+</section>-->
 
 <!-- ================= Category start ========================= -->
 <section class="utf_job_category_area">
@@ -381,6 +467,22 @@
     </div>
     <div class="row">
 		<div class="col-md-12">
+
+      <!--{% for category in categories %}
+      <div class="col-md-3 col-sm-6">
+        <a href="/jobs" title="{{ category.name }}">
+          <div class="utf_category_box_area">
+            <div class="utf_category_desc">
+              <div class="utf_category_icon"> <i class="{{ category.icon }}" aria-hidden="true"></i> </div>
+              <div class="category-detail utf_category_desc_text">
+                <h4>{{ category.name }}</h4>
+                <p>{{ category.count }} Jobs</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}-->
 		  <div class="col-md-3 col-sm-6">
 			<a href="/jobs" title="">
 				<div class="utf_category_box_area">

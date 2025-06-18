@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- ======================= Start Page Title ===================== -->
+<div class="page-title">
+  <div class="container">
+    <div class="page-caption">
+      <h2>Post Job</h2>
+      <p><a href="/" title="Home">Home</a> <i class="ti-angle-double-right"></i>PostJob</p>
+    </div>
+  </div>
+</div>
+<!-- ======================= End Page Title ===================== -->
+
+<!-- ====================== Start Job Post Form ============= -->
+<section class="padd-top-80 padd-bot-80" class="vh-100 bg-image">
+   
+  <div class="container">
+      <div class="log-box">
+        <form class="log-form" method="post" action="/post_job/" enctype="multipart/form-data"> 
+            <div class="box">
+                <div class="box-header">
+                  <h4>Information For Job</h4>
+                </div>
+            <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+               {% csrf_token %}
+                <label>Job Title</label>
+                <input type="text" class="form-control" placeholder="Job Title" name="job_title" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                <label>Experience</label>
+                <input type="text" class="form-control" placeholder="Experience" name="job_experience" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label>Qualification</label>
+                  <input type="text" class="form-control" placeholder="Degree" name="degree" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>No. Of Vacancy</label>
+                <input type="text" class="form-control" placeholder="No. Of Vacancy" name="open_position" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Type</label>
+                <input type="text" class="form-control" placeholder="Job Type" name="job_type" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label>Company Website</label>
+                  <input type="url" class="form-control" placeholder="Company Website" name="website" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Salary</label>
+                  <input type="text" class="form-control" placeholder="Salary" name="job_package" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Requirements</label>
+                  <input type="text" class="form-control" placeholder="Requirements" name="job_requirement" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Skills</label>
+                  <input type="text" class="form-control" placeholder="Skills" name="job_skill" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Description</label>
+                  <input type="text" class="form-control" placeholder="Description" name="job_desc" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" class="form-control" placeholder="Location" name="job_location" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Company Logo</label>
+                  <input type="file" class="form-control" name="company_logo" id="company_logo" required>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group text-center mrg-top-15">
+                  <button type="submit" class="btn theme-btn btn-m full-width">Post Job</button>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+			<div class="clearfix"></div>
+        </form>
+    </div>
+</div>
+</section>
+<!-- ====================== End Job Post Form ============= -->
+
+{% endblock %}
